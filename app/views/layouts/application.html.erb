@@ -10,15 +10,16 @@
   </head>
 
   <body>
-    <%= render '/partials/nav' %>
-    <div class="container">
-      <% if flash[:alert] %>
-        <p class="flash-notice"><%= alert %></p>
-      <% end %>
-      <% if flash[:notice] %>
-        <p class="flash-notice"><%= notice %></p>
-      <% end %>
-      <%= yield %>
-    </div>
+  <div>
+    <% if current_user %>
+      Has iniciado sesión como <strong><%= current_user.nombre %></strong>!
+      <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Iniciar sesión', new_user_session_path %>
+    <% end %>
+  </div>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
   </body>
 </html>
